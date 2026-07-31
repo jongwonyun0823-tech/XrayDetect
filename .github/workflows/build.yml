@@ -1,0 +1,31 @@
+name: Build Plugin
+
+# main 브랜치에 push 될 때마다, 그리고 수동 실행도 가능하게 설정
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: JDK 17 설치
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: maven
+
+      - name: Maven으로 빌드
+        run: mvn -B clean package
+
+      - name: 빌드된 jar 업로드
+        uses: actions/upload-artifact@v4
+        with:
+          name: XrayDetect-jar
+          path: target/XrayDetect.jar
