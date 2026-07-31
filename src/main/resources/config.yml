@@ -1,0 +1,52 @@
+# === XrayDetect 설정 ===
+
+# 이 점수 이상이면 관리자에게 알림 + 로그 기록
+threshold: 100
+
+# 노출면이 0개(벽에 완전히 막힌 상태)에서 채굴 시 곱해지는 배수
+hidden-multiplier: 3
+
+# 완전히 막힌 광석을 "streak-window-seconds" 안에 최소 이만큼 연속으로 캐야
+# 점수가 붙는다. 우연히 한두 번 막힌 광석을 캔 정상 플레이어를 걸러내기 위함.
+min-hidden-streak: 3
+streak-window-seconds: 60
+
+# N분마다 모든 플레이어의 의심 점수를 decay-amount 만큼 자동 감소 (오탐/정상 채굴 보정)
+decay-interval-minutes: 10
+decay-amount: 10
+
+# 로그 파일 이름 (플러그인 데이터 폴더 안에 생성됨)
+log-file: xray_log.txt
+
+# 알림 메시지 ({player}, {score} 치환 가능, & 색상코드 지원)
+alert-message: "&c[XrayDetect] &f{player}님이 X-ray 사용이 의심됩니다. (의심 점수: {score})"
+
+# === 리소스팩 강제 설정 ===
+# 아래 URL을 비워두면 리소스팩 강제 기능은 비활성화됨
+resource-pack-url: ""
+# SHA-1 해시 (선택사항, 비워두면 검증 없이 전송)
+resource-pack-sha1: ""
+resource-pack-prompt: "&e서버 이용을 위해 리소스팩 적용이 필요합니다."
+# true면 클라이언트가 거부할 수 없도록 강제(거부 시 접속 종료됨, 서버 자체 동작)
+resource-pack-force: true
+# 거부/실패는 x-ray와 무관한 사유(데이터 절약, 저사양, 네트워크 오류)가 흔하므로
+# 의심 점수에는 반영하지 않고 로그만 남긴다 (아래 kick-on-decline과는 별개).
+# 거부 시 즉시 강퇴할지 여부 - resource-pack-force가 true면 클라이언트가 자체적으로
+# 접속을 끊으므로 보통 false로 두어도 됨
+kick-on-decline: false
+kick-message: "&c서버 리소스팩을 적용해야 게임을 이용할 수 있습니다."
+
+# 감시할 광석과 채굴 시 기본 점수(가치가 높을수록 점수를 높게)
+ore-weights:
+  DIAMOND_ORE: 25
+  DEEPSLATE_DIAMOND_ORE: 25
+  ANCIENT_DEBRIS: 30
+  EMERALD_ORE: 25
+  DEEPSLATE_EMERALD_ORE: 25
+  GOLD_ORE: 10
+  DEEPSLATE_GOLD_ORE: 10
+  NETHER_GOLD_ORE: 8
+  REDSTONE_ORE: 5
+  DEEPSLATE_REDSTONE_ORE: 5
+  LAPIS_ORE: 8
+  DEEPSLATE_LAPIS_ORE: 8

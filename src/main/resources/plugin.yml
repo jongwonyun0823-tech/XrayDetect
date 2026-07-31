@@ -1,0 +1,14 @@
+name: XrayDetect
+version: '1.0'
+main: kr.xraydetect.XrayDetectPlugin
+api-version: '1.20'
+author: YourName
+description: 행동 패턴 기반으로 X-ray 사용 의심 플레이어를 탐지하는 경량 플러그인
+
+permissions:
+  xraydetect.alert:
+    description: X-ray 의심 알림을 받을 수 있는 권한 (관리자용)
+    default: op
+  xraydetect.bypass:
+    description: X-ray 탐지 대상에서 제외됨
+    default: op
